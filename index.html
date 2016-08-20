@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        #box{width:500px; height:60px; background:#fff; margin:300px auto;}
+        h2{color:#393139; font-size:17px; width:100px; float:left; margin:0; margin-top:20px; margin-left:15px;}
+        #list{width:110px; height:60px; margin:0;padding:0; float:left;}
+        #list li{background:url(images2/1.jpg); width:21px; height:21px; float:left; list-style:none; margin-top:16px;}
+        #box img{margin-top:10px;}
+        span{line-height:60px; color:#C63;}
+    </style>
+    <script>
+        window.onload=function(){
+            var oBox=document.getElementById('box');
+            var oUl=oBox.getElementsByTagName('ul')[0];
+            var aLi=oUl.getElementsByTagName('li');
+            var oImg=oBox.getElementsByTagName('img')[0];
+            var oSpan=oBox.getElementsByTagName('span')[0];
+            var arr=['url(images2/1.jpg)','url(images2/2.jpg)','url(images2/3.jpg)'];
+            var arr_new = ['url(images2/1.jpg)','url(images2/1.jpg)','url(images2/1.jpg)','url(images2/1.jpg)','url(images2/1.jpg)'];
+            var arr_text=['很差','较差','还行','推荐','力荐'];
+            var text=null;
+		for(var i=0;i<aLi.length;i++){
+                aLi[i].index=i+1;
+                var onOff=true;
+                aLi[i].onmouseover=function(){
+                    oImg.style.display = 'none';
+                    oSpan.style.display = 'block';
+                    
+          
+		            oSpan.innerHTML = arr_text[this.index-1];
+                    for(var i=0;i<aLi.length;i++){
+                        aLi[i].style.background = arr[0];
+                    }
+                    if(this.index<3){  //鼠标移入前两颗星的时候，成灰色
+                        for(var i=0;i<this.index;i++){        //让当前点li和li之前的改变背景
+                            aLi[i].style.background = arr[2];
+                        }
+                    }else{
+                        for(var i=0;i<this.index;i++){        //让当前li和li之前的改变背景
+                            aLi[i].style.background = arr[1];
+                        }
+                    }
+                };
+                aLi[i].onmouseout=function(){
+                    if(onOff){
+                        oImg.style.display='block';
+                        oSpan.style.display='none';
+			
+                    }
+                    oSpan.innerHTML =text;
+                    for(var i=0;i<aLi.length;i++){
+                        aLi[i].style.background = arr_new[i];
+
+                    }
+                };
+                aLi[i].onclick=function(){
+                    onOff=false;
+                   text=arr_text[this.index-1];
+		            if(this.index<3){
+                       for(i=0;i<this.index;i++){
+                           aLi[i].style.background=arr[2];
+                           arr_new[i]=arr[2];
+                           
+
+                       }
+                       for(var i=this.index;i<aLi.length;i++){
+                           aLi[i].style.background=arr[0];
+                           arr_new[i]=arr[0];
+                       }
+                   }
+                   else{
+
+                       for(i=0;i<this.index;i++){
+                           aLi[i].style.background=arr[1];
+                           arr_new[i]=arr[1];
+                           
+                       }
+                       for(i=this.index;i<aLi.length;i++){
+                           aLi[i].style.background=arr[0];
+                           arr_new[i]=arr[0];
+                       }
+                   }
+                }
+            }
+
+        }
+    </script>
+</head>
+<body>
+<div id="box">
+    <h2>*总体评价</h2>
+    <ul id="list">
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+    <img src="images2/4.jpg" alt=""/>
+    <span></span>
+</div>
+
+</body>
+</html>
